@@ -1,0 +1,12 @@
+venv/
+data/
+checkpoints/
+.git/
+__pycache__/
+*.pyc
+*.pt
+*.pth
+k8s/
+tests/
+.github/
+README.md
