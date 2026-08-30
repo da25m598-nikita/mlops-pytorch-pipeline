@@ -35,6 +35,6 @@ def get_dataloaders(data_dir, batch_size):
         transform=get_transforms(train=False),
     )
 
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False)
+    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=2)
+    val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=2)
     return train_loader, val_loader

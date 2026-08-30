@@ -21,6 +21,9 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
     correct = 0
     total = 0
 
+    batch_number = 0
+    total_batches = len(loader)
+
     for images, labels in loader:
         images = images.to(device)
         labels = labels.to(device)
@@ -34,6 +37,17 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
         _, predicted = outputs.max(1)
         total += labels.size(0)
         correct += predicted.eq(labels).sum().item()
+
+        batch_number = batch_number + 1
+        if batch_number % 50 == 0:
+            running_loss = total_loss / total
+            progress = {
+                "event": "progress",
+                "batch": batch_number,
+                "total_batches": total_batches,
+                "running_loss": round(running_loss, 4),
+            }
+            print(json.dumps(progress), flush=True)
 
     avg_loss = total_loss / total
     accuracy = correct / total
